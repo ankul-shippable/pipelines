@@ -22,7 +22,7 @@ resources:
       
   - name: ECS-cluster
     type: cluster
-    integration: "ecs-subint"
+    integration: "ecs-shared-subint"
     versionTemplate:
       sourceName: "ecs-cluster"
       region: "us-west-2"
