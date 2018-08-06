@@ -10,20 +10,8 @@ jobs:
     steps:
       - IN: manifest-job
       - IN: ECS-cluster
-      - IN: scaler
-      - IN: dockerOptions
-      - IN: classicLB
-        applyTo:
-          - manifest: manifest-job
-            image: nginx-image
-            port: 80
 
 resources:
-  - name: scaler
-    type: replicas
-    version:
-      count: 2
-
   - name: nginx-image
     type: image
     integration: "docker-subint"
@@ -32,30 +20,9 @@ resources:
     seed:
       versionName: latest
       
-  - name: nginx-image-2
-    type: image
-    integration: "docker-subint"
-    pointer:
-      sourceName: "ankul/app2"
-    seed:
-      versionName: latest      
-
   - name: ECS-cluster
     type: cluster
     integration: "ecs-subint"
     versionTemplate:
       sourceName: "ecs-cluster"
       region: "us-west-2"
-    
-  - name: classicLB
-    type: loadBalancer
-    versionTemplate:
-      sourceName: classiclb
-      method: classic
-      role: "lb_role"
-      
-  - name: dockerOptions
-    type: dockerOptions
-    versionTemplate:
-      portMappings:
-        - "80:80/tcp" #hostPort:containerPort/protocol (udp|tcp)      
