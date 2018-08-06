@@ -23,13 +23,13 @@ resources:
 
   - name: kube-access
     type: integration
-    integration: "ssh-subint"
+    integration: "ssh-shared-subint"
 
   - name: KUBE-cluster
     type: cluster
-    integration: "kube-subint"
+    integration: "kube-shared-subint"
     pointer:
       bastionHost:
-        address: 34.221.17.67
+        address: 34.220.157.5
         user: ubuntu
         keyIntegration: "kube-access"
