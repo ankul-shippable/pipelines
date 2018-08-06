@@ -4,25 +4,32 @@ jobs:
     steps:
       - IN: nginx-image
 
-  - name: ECS-deploy
+  - name: KUBE-deploy
     type: deploy
-    method: blueGreen  
+    method: blueGreen
     steps:
       - IN: manifest-job
-      - IN: ECS-cluster
+      - IN: KUBE-cluster
+      - IN: kube-access
 
 resources:
   - name: nginx-image
     type: image
     integration: "docker-subint"
     pointer:
-      sourceName: "ankul/app"
+      sourceName: "ankul/nginx"
     seed:
-      versionName: latest
-      
-  - name: ECS-cluster
+      versionName: prod.10
+
+  - name: kube-access
+    type: integration
+    integration: "ssh-subint"
+
+  - name: KUBE-cluster
     type: cluster
-    integration: "ecs-subint"
-    versionTemplate:
-      sourceName: "ecs-cluster"
-      region: "us-west-2"
+    integration: "kube-subint"
+    pointer:
+      bastionHost:
+        address: 34.221.17.67
+        user: ubuntu
+        keyIntegration: "kube-access"
