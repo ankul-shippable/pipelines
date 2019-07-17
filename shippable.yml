@@ -6,7 +6,6 @@ jobs:
   - name: job-0b
     type: runSh
     steps:
-      - IN: state-1
       - TASK:
           - script: echo true   
 
