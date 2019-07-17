@@ -3,10 +3,18 @@ build:
     - echo "true"
 
 jobs:
+  - name: job-0b
+    type: runSh
+    steps:
+      - IN: state-1
+      - TASK:
+          - script: echo true   
+
   - name: job-0a
     type: runSh
     steps:
       - IN: state-1
+      - IN: job-0b
       - TASK:
           - script: echo true          
 
