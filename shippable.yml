@@ -8,8 +8,9 @@ jobs:
     steps:
 #       - IN: state-1
       - TASK:
-        - script: shipctl get_resource_version_key state-1 "BUILD"
-        - script: shipctl post_resource_state state-1 "BUILD" "build_"$BUILD_NUMBER
+          - script: echo true
+#         - script: shipctl get_resource_version_key state-1 "BUILD"
+#         - script: shipctl post_resource_state state-1 "BUILD" "build_"$BUILD_NUMBER
 #       - OUT: state-1
       
   - name: job-2
